@@ -1,0 +1,86 @@
+body {
+    background: black;
+    color: #bdbdbd;
+    font-weight: 300;
+    height: 100vh;
+    margin: 0;
+    font-family: Helvetica neue, roboto, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+#name-error, #age-error, #password-error, #email-error {
+    justify-content: flex-start;
+    margin-left: 2%;
+    color: red;
+    display: none;
+}
+
+.form-group label {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.good-reg {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    color: white;
+    font-size: 1.7rem;
+    height: 100px;
+}
+
+.good-reg a:hover {
+    color: rgba(0, 0, 255, 0.71);
+    text-decoration: none;
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 100%;
+}
+
+.admin-container a {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.3rem;
+    margin-bottom: 2%;
+}
+
+.admin-container table {
+    width: 50%;
+}
+
+.admin-container table td, th {
+    border: 1pt solid white;
+    padding: 1% 2%;
+}
+
+.empty-list {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1.7rem;
+}
+
+.admin-container .empty-list a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-container{
+    margin-left: -10%;
+    width: 120%;
+}
