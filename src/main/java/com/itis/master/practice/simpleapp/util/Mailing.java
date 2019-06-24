@@ -25,7 +25,7 @@ public class Mailing {
     public static void sendMail(String email, String name) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setFrom("grigorich.poker@yandex.ru");
+        message.setFrom("springbootigoryan@yandex.ru");
         message.setSubject("Подтверждение регистрации");
         String key_one = DigestUtils.md5Hex(email);
         String key_two = DigestUtils.md5Hex(key_one);
