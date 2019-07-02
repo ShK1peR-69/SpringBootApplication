@@ -5,9 +5,9 @@ import com.itis.master.practice.simpleapp.services.interfaces.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /*****
@@ -18,11 +18,9 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    private final HttpServletRequest request;
     private final UserService userService;
 
-    public MainController(HttpServletRequest request, UserService userService) {
-        this.request = request;
+    public MainController(UserService userService) {
         this.userService = userService;
     }
 
@@ -43,8 +41,7 @@ public class MainController {
 
     @ResponseBody
     @RequestMapping(value = "/check-mail", method = RequestMethod.POST)
-    public String checkNewUserEmail() {
-        String email = request.getParameter("email");
+    public String checkNewUserEmail(@RequestParam("email") String email) {
         List<User> users = userService.getAllUsers();
         for (User u : users) {
             if (u.getEmail().equals(email)) {

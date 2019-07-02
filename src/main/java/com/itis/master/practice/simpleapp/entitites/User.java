@@ -43,6 +43,13 @@ public class User {
     public User() {
     }
 
+    public User(String fio, int age, String email, String password) {
+        this.fio = fio;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

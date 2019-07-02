@@ -11,6 +11,9 @@
 <body>
 
 <form action="/registration" method="post">
+    <#if msg?? && msg?has_content>
+        <div class="error-msg">Пароли не совпадают</div>
+    </#if>
     <div class="main-container">
         <div class="form-group">
             <label for="full_name">Введите имя</label>
@@ -46,8 +49,8 @@
     <button type="submit" class="btn btn-primary" id="submit-button">Зарегистрироваться</button>
 </form>
 
-<script type="text/javascript" src="js/checkTwoPasswords.js"></script>
 <script type="text/javascript" src="js/checkData.js"></script>
+<script type="text/javascript" src="js/checkTwoPasswords.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 
 </body>

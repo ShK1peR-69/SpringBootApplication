@@ -1,6 +1,7 @@
 package com.itis.master.practice.simpleapp.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -10,9 +11,10 @@ import java.util.Arrays;
  * Additional methods for app
  *****/
 
+@Component
 public class Methods {
 
-    public static String hashPass(String password) {
+    public String hashPass(String password) {
         password = "first_sold" + password;
         password = Arrays.toString(DigestUtils.sha256(password));
         password += "second_sold";
@@ -20,7 +22,7 @@ public class Methods {
         return password;
     }
 
-    public static String createKey(String email) {
+    public String createKey(String email) {
         String key = DigestUtils.md5Hex(email);
         key = DigestUtils.md5Hex(key) + key;
         return key;

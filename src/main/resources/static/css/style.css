@@ -16,6 +16,11 @@ h1 {
     font-weight: 300;
 }
 
+.error-msg {
+    color: red;
+    margin-bottom: 20px;
+}
+
 #name-error, #age-error, #password-error, #email-error {
     justify-content: flex-start;
     margin-left: 2%;
@@ -80,7 +85,7 @@ h1 {
     justify-content: center;
 }
 
-.main-container{
+.main-container {
     margin-left: -10%;
     width: 120%;
 }
