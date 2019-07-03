@@ -1,10 +1,12 @@
 package com.itis.master.practice.simpleapp.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,28 +19,34 @@ import java.util.concurrent.Executors;
 @Component
 public class Mailing {
 
-    private final JavaMailSender mailSender;
+    private final JavaMailSenderImpl mailSender;
 
-    public Mailing(JavaMailSender mailSender) {
+    public Mailing(JavaMailSenderImpl mailSender) {
         this.mailSender = mailSender;
     }
 
     public void sendMail(String email, String name) {
         ExecutorService service = Executors.newCachedThreadPool();
         service.submit(() -> {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(email);
-            message.setFrom("springbootigoryan@yandex.ru");
-            message.setSubject("Подтверждение регистрации");
-            String key_one = DigestUtils.md5Hex(email);
-            String key_two = DigestUtils.md5Hex(key_one);
-            String text = "Здравствуйте, " + name + "! \n\n" +
-                    "Для завершения регистрации Вам необходимо перейти по сслыке ниже: \n" +
-                    "http://localhost:8080/registration/?mucho=" + key_one + "&rzd=" + key_two + "\n\n" +
-                    "Если данное письмо отпрвлено Вам по ошибке, пожалуйста, проигнорируйте его.\n" +
-                    "Спасибо!";
-            message.setText(text);
-            mailSender.send(message);
+            MimeMessage message = mailSender.createMimeMessage();
+            try {
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+                helper.setTo(email);
+                helper.setFrom("springbootigoryan@yandex.ru");
+                helper.setSubject("Подтверждение регистрации");
+                String key_one = DigestUtils.md5Hex(email);
+                String key_two = DigestUtils.md5Hex(key_one);
+                String text = "<html><body>Здравствуйте, " + name + "! <br/><br/>" +
+                        "Для завершения регистрации Вам необходимо перейти по сслыке ниже: <br/>" +
+                        "<a href=\"http://localhost:8080/registration/?mucho=" + key_one + "&rzd=" + key_two + "\">" +
+                        "Подтвердить регистрацию</a><br/><br/>" +
+                        "Если данное письмо отпрвлено Вам по ошибке, пожалуйста, проигнорируйте его.<br/>" +
+                        "Спасибо! </body></html>";
+                helper.setText(text, true);
+                mailSender.send(message);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         });
         service.shutdown();
     }
