@@ -31,12 +31,12 @@ public class Mailing {
             MimeMessage message = mailSender.createMimeMessage();
             try {
                 MimeMessageHelper helper = new MimeMessageHelper(message, true);
-                helper.setTo(email);
                 helper.setFrom("springbootigoryan@yandex.ru");
+                helper.setTo(email);
                 helper.setSubject("Подтверждение регистрации");
-                String key_one = DigestUtils.md5Hex(email);
-                String key_two = DigestUtils.md5Hex(key_one);
-                String text = "<html><body>Здравствуйте, " + name + "! <br/><br/>" +
+                final String key_one = DigestUtils.md5Hex(email);
+                final String key_two = DigestUtils.md5Hex(key_one);
+                final String text = "<html><body>Здравствуйте, " + name + "! <br/><br/>" +
                         "Для завершения регистрации Вам необходимо перейти по сслыке ниже: <br/>" +
                         "<a href=\"http://localhost:8080/registration/?mucho=" + key_one + "&rzd=" + key_two + "\">" +
                         "Подтвердить регистрацию</a><br/><br/>" +
