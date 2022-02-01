@@ -6,7 +6,7 @@ import java.util.List;
 
 /*****
  * @author Igor Astafyev
- * June, 2019
+ * June 2019
  *****/
 
 public interface UserService {
@@ -16,5 +16,7 @@ public interface UserService {
     List<User> getAllUsers();
 
     void updateUserApproval(String key);
+
+    User getUserById(Long id);
 
 }

@@ -12,43 +12,43 @@ import java.util.List;
 
 /*****
  * @author Igor Astafyev
- * June, 2019
+ * June 2019
  *****/
 
 @Controller
 public class MainController {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    public MainController(UserService userService) {
-        this.userService = userService;
-    }
+	public MainController(UserService userService) {
+		this.userService = userService;
+	}
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String returnMainPage() {
-        return "mainpage";
-    }
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String returnMainPage() {
+		return "mainpage";
+	}
 
-    @RequestMapping(value = "/good", method = RequestMethod.GET)
-    public String returnGoodRegistrationPage() {
-        return "good";
-    }
+	@RequestMapping(value = "/good", method = RequestMethod.GET)
+	public String returnGoodRegistrationPage() {
+		return "good";
+	}
 
-    @RequestMapping(value = "/great-registration", method = RequestMethod.GET)
-    public String returnCongratulations() {
-        return "great";
-    }
+	@RequestMapping(value = "/great-registration", method = RequestMethod.GET)
+	public String returnCongratulations() {
+		return "great";
+	}
 
-    @ResponseBody
-    @RequestMapping(value = "/check-mail", method = RequestMethod.POST)
-    public String checkNewUserEmail(@RequestParam("email") String email) {
-        List<User> users = userService.getAllUsers();
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                return "error";
-            }
-        }
-        return "ok";
-    }
+	@ResponseBody
+	@RequestMapping(value = "/check-mail", method = RequestMethod.POST)
+	public String checkNewUserEmail(@RequestParam("email") String email) {
+		List<User> users = userService.getAllUsers();
+		for (User u : users) {
+			if (u.getEmail().equals(email)) {
+				return "error";
+			}
+		}
+		return "ok";
+	}
 
 }
